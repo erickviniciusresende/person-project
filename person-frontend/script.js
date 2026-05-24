@@ -1,5 +1,10 @@
 async function updatePerson() {
 
+    if(!validation()) {
+
+        return;
+    }
+
     const id = document.getElementById("textId").value;
 
     const name = document.getElementById("textName").value
@@ -39,6 +44,11 @@ async function updatePerson() {
 }
 
 async function createPerson() {
+
+    if(!validation()) {
+
+        return;
+    }
 
     const name = document.getElementById("textName").value
 
@@ -154,6 +164,52 @@ function selectPerson(id, name, city) {
     document.getElementById("textName").value = name;
     document.getElementById("textCity").value = city;
 
+}
+
+function validation() {
+    const name =
+        document.getElementById("textName").value;
+
+    const city =
+        document.getElementById("textCity").value;
+
+    if(name.trim() === "") {
+
+        alert("Nome não pode ficar vazio");
+        return false;
+    }
+
+    if(name.length < 3) {
+
+        alert("Nome deve ter pelo menos 3 letras");
+        return false;
+    }
+
+    if(name.length > 20) {
+
+        alert("Nome deve ter no máximo 20 letras");
+        return false;
+    }
+
+    if(city.trim() === "") {
+
+        alert("Cidade não pode ficar vazia");
+        return false;
+    }
+
+    if(city.length < 3) {
+
+        alert("Cidade deve ter pelo menos 3 letras");
+        return false;
+    }
+
+    if(city.length > 20) {
+
+        alert("Cidade deve ter no máximo 20 letras");
+        return false;
+
+    return true;
+    }
 }
 
 findAllPeople()
