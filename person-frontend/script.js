@@ -207,9 +207,9 @@ function validation() {
 
         alert("Cidade deve ter no máximo 20 letras");
         return false;
-
-    return true;
     }
+    
+    return true;
 }
 
 findAllPeople()
