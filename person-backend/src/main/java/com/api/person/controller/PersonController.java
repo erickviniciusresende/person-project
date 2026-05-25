@@ -1,5 +1,7 @@
 package com.api.person.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +38,16 @@ public class PersonController {
         public ResponseEntity<Person> findPersonById(@PathVariable Integer id) {
             Person person = personService.findPersonById(id);
             return ResponseEntity.status(HttpStatus.OK).body(person);
+        }
+
+        @GetMapping("/select/name/{name}")
+        public ResponseEntity<List<Person>> findByNameContaining(@PathVariable String name) {
+
+            List<Person> people = personService.findByNameContaining(name);
+
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(people);
         }
 
         @GetMapping("/select")

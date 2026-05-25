@@ -1,5 +1,7 @@
 package com.api.person.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,11 @@ public class PersonService {
             .findById(id)
             .orElseThrow(() ->
         new RuntimeException("Pessoa não encontrada"));
+    }
+
+    public List<Person> findByNameContaining(String name) {
+
+        return personRepository.findByNameContainingIgnoreCase(name);
     }
 
      public Iterable<Person> findAllPeople() {

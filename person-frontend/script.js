@@ -1,3 +1,58 @@
+async function findPersonByName() {
+
+    const name = document.getElementById("textName").value;
+
+    if(name.trim() === "") {
+
+        findAllPeople();
+        alert("Campo nome está vazio")
+
+        return;
+    }
+
+    const response =
+        await fetch(
+            `http://localhost:8080/select/name/${name}`
+        );
+
+    const data =
+        await response.json();
+
+    if(data.length === 0) {
+
+        findAllPeople();
+        alert("Nenhuma pessoa encontrada")
+
+        return;
+    }
+
+    const peopleDiv = document.getElementById("people");
+
+    peopleDiv.innerHTML = "";
+
+    data.forEach(person => {
+
+        peopleDiv.innerHTML += `
+
+            <div onclick="selectPerson(
+                ${person.id},
+                '${person.name}',
+                '${person.city}'
+            )">
+
+                <h3>${person.name}</h3>
+
+                <p>${person.city}</p>
+
+                <hr>
+
+            </div>
+        `;
+    });
+
+    console.log(data);
+}
+
 async function updatePerson() {
 
     if(!validation()) {
@@ -7,9 +62,9 @@ async function updatePerson() {
 
     const id = document.getElementById("textId").value;
 
-    const name = document.getElementById("textName").value
+    const name = document.getElementById("textName").value;
 
-    const city = document.getElementById("textCity").value
+    const city = document.getElementById("textCity").value;
 
     const person = {
         name: name,
