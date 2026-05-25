@@ -20,7 +20,8 @@ public class PersonService {
 
         return this.personRepository
             .findById(id)
-            .orElse(null);
+            .orElseThrow(() ->
+        new RuntimeException("Pessoa não encontrada"));
     }
 
      public Iterable<Person> findAllPeople() {

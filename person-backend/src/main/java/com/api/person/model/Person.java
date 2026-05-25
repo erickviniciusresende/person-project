@@ -18,11 +18,11 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank
-    @Size(min = 3, max = 20)
+    @NotBlank(message = "O campo nome não pode ficar em branco")
+    @Size(min = 3, max = 20, message = "O nome precisa ter entre 3 e 20 caracteres")
     private String name;
     
-    @NotBlank
-    @Size(min = 3, max = 20)
+    @NotBlank(message = "O campo cidade não pode ficar em branco")
+    @Size(min = 3, max = 20, message = "A cidade precisa ter entre 3 e 20 caracteres")
     private String city;
 }
