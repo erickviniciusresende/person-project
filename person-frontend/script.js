@@ -32,6 +32,16 @@ async function updatePerson() {
             }
         );
 
+        if(!response.ok) {
+
+        const error =
+            await response.json();
+
+        alert(error.message);
+
+        return;
+    }
+
     alert("Pessoa alterada com sucesso")
 
     document.getElementById("textId").value = "";
@@ -75,6 +85,16 @@ async function createPerson() {
             }
         );
 
+        if(!response.ok) {
+
+        const error =
+            await response.json();
+
+        alert(error.message);
+
+        return;
+    }
+
     const data =
         await response.json();
 
@@ -107,8 +127,6 @@ async function deletePerson() {
                     "Content-Type":
                         "application/json"
                 },
-
-                //body: JSON.stringify(person)
             }
         );
 
@@ -167,11 +185,9 @@ function selectPerson(id, name, city) {
 }
 
 function validation() {
-    const name =
-        document.getElementById("textName").value;
+    const name = document.getElementById("textName").value;
 
-    const city =
-        document.getElementById("textCity").value;
+    const city = document.getElementById("textCity").value;
 
     if(name.trim() === "") {
 
