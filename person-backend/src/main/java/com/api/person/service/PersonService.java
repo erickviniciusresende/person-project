@@ -3,6 +3,8 @@ package com.api.person.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.api.person.model.Person;
@@ -31,8 +33,8 @@ public class PersonService {
         return personRepository.findByNameContainingIgnoreCase(name);
     }
 
-     public Iterable<Person> findAllPeople() {
-         return personRepository.findAll();
+     public Page<Person> findAllPeople(Pageable pageable) {
+         return personRepository.findAll(pageable);
      }
 
      public Person updatePerson(Person obj, Integer id) {

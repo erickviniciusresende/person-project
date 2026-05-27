@@ -1,3 +1,5 @@
+let currentPage = 0;
+
 async function findPersonByName() {
 
     const name = document.getElementById("textName").value;
@@ -153,8 +155,6 @@ async function createPerson() {
     const data =
         await response.json();
 
-    console.log(data);
-
     alert("Pessoa criada com sucesso")
 
     document.getElementById("textId").value = "";
@@ -200,17 +200,29 @@ async function deletePerson() {
 async function findAllPeople() {
 
     const response =
-        await fetch("http://localhost:8080/select");
+        await fetch(`http://localhost:8080/select?page=${currentPage}&size=5`);
 
     const data =
         await response.json();
+
+    if(data.last == true) {
+        document.getElementById("btnNext").style.display = "none";
+    } else {
+        document.getElementById("btnNext").style.display = "block";
+    }
+
+    if(data.first == true) {
+        document.getElementById("btnPrevious").style.display = "none";
+    } else {
+        document.getElementById("btnPrevious").style.display = "block";
+    }
 
     const peopleDiv =
         document.getElementById("people");
 
     peopleDiv.innerHTML = "";
 
-    data.forEach(person => {
+    data.content.forEach(person => {
 
         peopleDiv.innerHTML += `
 
@@ -281,6 +293,23 @@ function validation() {
     }
     
     return true;
+}
+
+function nextPage() {
+
+    currentPage++;
+
+    findAllPeople();
+}
+
+function previousPage() {
+
+    if(currentPage > 0) {
+
+        currentPage--;
+
+        findAllPeople();
+    }
 }
 
 findAllPeople()
