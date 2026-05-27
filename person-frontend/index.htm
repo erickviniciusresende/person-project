@@ -10,35 +10,46 @@
 
 <body>
 
-    <input id="textId" type="text" placeholder="ID" readonly>
-    <input id="textName" type="text" placeholder="Nome">
-    <input id="textCity" type="text" placeholder="Cidade">
+    <div id="header">
+        <div id="textFieldsHeader">
+            <input id="textId" type="text" placeholder="ID" readonly>
+            <input id="textName" type="text" placeholder="Nome">
+            <input id="textCity" type="text" placeholder="Cidade">
+        </div>
+        
+        <div id="buttonsHeader">
+            <button onclick="findPersonByName()">
+                Buscar pessoa
+            </button>
 
-    <button onclick="findPersonByName()">
-        Buscar pessoa
-    </button>
+            <button onclick="updatePerson()">
+                Alterar pessoa
+            </button>
 
-    <button onclick="updatePerson()">
-        Alterar pessoa
-    </button>
+            <button onclick="createPerson()">
+                Criar pessoa
+            </button>
 
-    <button onclick="createPerson()">
-        Criar pessoa
-    </button>
+            <button onclick="deletePerson()">
+                Deletar pessoa
+            </button>
+        </div>
 
-    <button onclick="deletePerson()">
-        Deletar pessoa
-    </button>
-
-    <button id="btnPrevious" onclick="previousPage()">
-    Anterior
-    </button>
-
-    <button id="btnNext" onclick="nextPage()">
-        Próxima
-    </button>
+        <div id="message"></div>
+    </div>
+    
 
     <div id="people"></div>
+
+    <div class="container">
+        <button id="btnPrevious" onclick="previousPage()">
+            Anterior
+        </button>
+
+        <button id="btnNext" onclick="nextPage()">
+            Próxima
+        </button>
+    </div>
     
     <script src="script.js"></script>
 

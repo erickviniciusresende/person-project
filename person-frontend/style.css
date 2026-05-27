@@ -1,0 +1,28 @@
+#header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#textFieldsHeader {
+    display: flex;
+    gap: 10px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+#buttonsHeader {
+    display: flex;
+    gap: 10px;
+    padding-bottom: 50px;
+}
+
+.container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    padding-bottom: 30px;
+}

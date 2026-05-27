@@ -1,4 +1,5 @@
 let currentPage = 0;
+let messageSuccessOrError = document.getElementById("message");
 
 async function findPersonByName() {
 
@@ -99,7 +100,7 @@ async function updatePerson() {
         return;
     }
 
-    alert("Pessoa alterada com sucesso")
+    showMessage("Pessoa alterada com sucesso", "green");
 
     document.getElementById("textId").value = "";
 
@@ -155,7 +156,7 @@ async function createPerson() {
     const data =
         await response.json();
 
-    alert("Pessoa criada com sucesso")
+    showMessage("Pessoa criada com sucesso", "green");
 
     document.getElementById("textId").value = "";
 
@@ -185,7 +186,7 @@ async function deletePerson() {
             }
         );
 
-    alert("Pessoa deletada com sucesso")
+    showMessage("Pessoa deletada com sucesso", "green");
 
     document.getElementById("textId").value = "";
 
@@ -206,19 +207,18 @@ async function findAllPeople() {
         await response.json();
 
     if(data.last == true) {
-        document.getElementById("btnNext").style.display = "none";
+        document.getElementById("btnNext").style.visibility = "hidden";
     } else {
-        document.getElementById("btnNext").style.display = "block";
+        document.getElementById("btnNext").style.visibility = "visible";
     }
 
     if(data.first == true) {
-        document.getElementById("btnPrevious").style.display = "none";
+        document.getElementById("btnPrevious").style.visibility = "hidden";
     } else {
-        document.getElementById("btnPrevious").style.display = "block";
+        document.getElementById("btnPrevious").style.visibility = "visible";
     }
 
-    const peopleDiv =
-        document.getElementById("people");
+    const peopleDiv = document.getElementById("people");
 
     peopleDiv.innerHTML = "";
 
@@ -253,42 +253,41 @@ function selectPerson(id, name, city) {
 
 function validation() {
     const name = document.getElementById("textName").value;
-
     const city = document.getElementById("textCity").value;
 
     if(name.trim() === "") {
 
-        alert("Nome não pode ficar vazio");
+        showMessage("Nome não pode ficar vazio", "red");
         return false;
     }
 
     if(name.length < 3) {
 
-        alert("Nome deve ter pelo menos 3 letras");
+        showMessage("Nome deve ter pelo menos 3 letras", "red");
         return false;
     }
 
     if(name.length > 20) {
 
-        alert("Nome deve ter no máximo 20 letras");
+        showMessage("Nome deve ter no máximo 20 letras", "red");
         return false;
     }
 
     if(city.trim() === "") {
 
-        alert("Cidade não pode ficar vazia");
+        showMessage("Cidade não pode ficar vazia", "red");
         return false;
     }
 
     if(city.length < 3) {
 
-        alert("Cidade deve ter pelo menos 3 letras");
+        showMessage("Cidade deve ter pelo menos 3 letras", "red")
         return false;
     }
 
     if(city.length > 20) {
 
-        alert("Cidade deve ter no máximo 20 letras");
+        showMessage("Cidade deve ter no máximo 20 letras", "red")
         return false;
     }
     
@@ -310,6 +309,19 @@ function previousPage() {
 
         findAllPeople();
     }
+}
+
+function showMessage(text, color) {
+    const message = document.getElementById("message");
+
+    message.innerText = text;
+    message.style.color = color;
+
+    setTimeout(() => {
+
+        message.innerText = "";
+
+    }, 3000);
 }
 
 findAllPeople()
