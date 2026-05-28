@@ -13,10 +13,14 @@ async function findPersonByName() {
         return;
     }
 
+    disableButtons("btnFindPerson", "Buscando");
+
     const response =
         await fetch(
             `http://localhost:8080/select/name/${name}`
         );
+
+    enableButtons("btnFindPerson", "Buscar Pessoa");
 
     const data =
         await response.json();
@@ -74,6 +78,8 @@ async function updatePerson() {
         city: city
     }
 
+    disableButtons("btnUpdate", "Atualizando")
+
     const response =
         await fetch(
             `http://localhost:8080/update/${id}`,
@@ -89,6 +95,8 @@ async function updatePerson() {
                 body: JSON.stringify(person)
             }
         );
+
+    enableButtons("btnUpdate", "Alterar Pessoa");
 
         if(!response.ok) {
 
@@ -127,6 +135,8 @@ async function createPerson() {
         city: city
     }
 
+    disableButtons("btnCreate", "Salvando")
+
     const response =
         await fetch(
             `http://localhost:8080/register`,
@@ -142,6 +152,9 @@ async function createPerson() {
                 body: JSON.stringify(person)
             }
         );
+
+    document.getElementById("btnCreate").disabled = false;
+    document.getElementById("btnCreate").innerText = "Criar pessoa";
 
         if(!response.ok) {
 
@@ -172,6 +185,8 @@ async function deletePerson() {
 
     const id = document.getElementById("textId").value
 
+    disableButtons("btnDelete", "Deletando")
+
     const response =
         await fetch(
             `http://localhost:8080/remove/${id}`,
@@ -185,6 +200,8 @@ async function deletePerson() {
                 },
             }
         );
+
+    enableButtons("btnDelete", "Deletar Pessoa");
 
     showMessage("Pessoa deletada com sucesso", "green");
 
@@ -322,6 +339,16 @@ function showMessage(text, color) {
         message.innerText = "";
 
     }, 3000);
+}
+
+function disableButtons(idButton, textButton) {
+    document.getElementById(idButton).disabled = true;
+    document.getElementById(idButton).innerText = textButton;
+}
+
+function enableButtons(idButton, textButton) {
+    document.getElementById(idButton).disabled = false;
+    document.getElementById(idButton).innerText = textButton;
 }
 
 findAllPeople()
